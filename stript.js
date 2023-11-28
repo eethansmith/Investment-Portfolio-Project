@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Assuming your JSON data is stored locally in a file named `data.json`
-    fetch('data.json')
+    fetch('investments_data.json')
         .then(response => response.json())
         .then(data => {
             displayData(data);

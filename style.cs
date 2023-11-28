@@ -1,34 +1,55 @@
-body {
-    font-family: Arial, sans-serif;
+/* Basic Reset */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    text-align: center;
+    box-sizing: border-box;
 }
 
-#portfolioContainer {
-    width: 80%;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333; /* Dark background */
+    color: #fff; /* Light text color for contrast */
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
     margin: auto;
-    background: white;
-    padding: 20px;
+    overflow: auto;
+    padding: 0 20px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+#navbar {
+    background: #444; /* Slightly lighter background for the navbar */
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
 }
 
-table, th, td {
-    border: 1px solid black;
+#navbar .logo {
+    font-size: 30px;
+    margin-left: 20px;
 }
 
-th, td {
-    padding: 10px;
-    text-align: left;
+#navbar ul {
+    list-style: none;
+    display: flex;
 }
 
-th {
-    background-color: #4CAF50;
-    color: white;
+#navbar ul li {
+    padding: 0 20px;
+}
+
+#navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#navbar ul li a:hover {
+    background-color: #555; /* Hover effect for links */
+    border-radius: 5px;
 }
