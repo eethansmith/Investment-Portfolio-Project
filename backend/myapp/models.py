@@ -1,11 +1,13 @@
 from django.db import models
 
 class Transaction(models.Model):
-    transaction_type = models.CharField(max_length=10)
-    date = models.DateField()
-    time = models.TimeField()
+    TRANSACTION_TYPES = [('BUY', 'Buy'), ('SELL', 'Sell')]
+
+    transaction_type = models.CharField(max_length=4, choices=TRANSACTION_TYPES)
+    date = models.DateField()  # Storing date as a DateField
+    time = models.TimeField()  # Storing time as a TimeField
     ticker_symbol = models.CharField(max_length=10)
-    number_of_shares = models.DecimalField(max_digits=15, decimal_places=2)
+    number_of_shares = models.DecimalField(max_digits=10, decimal_places=2)
     price_per_share = models.DecimalField(max_digits=15, decimal_places=2)
     image_filename = models.CharField(max_length=100)
     transaction_valuation = models.DecimalField(max_digits=15, decimal_places=2)

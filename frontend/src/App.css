@@ -1,38 +1,74 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212; /* Dark background */
+  color: #F5F5F5; /* Off-white text color */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #121212; /* Same as body background */
+  padding: 20px;
+  text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+h1 {
+  color: #F5F5F5; /* Off-white color for the title */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-nav {
+  background-color: #1a1a1a; /* Slightly lighter/different than main background for contrast */
+  padding: 10px 20px;
+  text-align: right;
+}
+
+.nav-links button {
+  background-color: transparent;
+  border: none;
+  color: #F5F5F5;
+  margin: 0 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 17px; /* Adjust this value as needed */
+}
+
+.nav-links button:hover {
+  color: #4CAF50; /* Change color on hover for visual feedback */
+}
+
+.nav-links button.active {
+  font-weight: bold;
+  color: #F5F5F5; /* You can change the color to make it more noticeable if desired */
+}
+
+.home-button {
+  display: inline-block;
+  position: relative;
+  margin-right: 20px;
+}
+
+.home-button img {
+  width: 50px; /* Adjust size as needed */
+  height: 50px;
+  border-radius: 50%; /* Makes the image circular */
+  cursor: pointer;
+}
+
+.home-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: -20px;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  color: #F5F5F5;
+}
+
+.home-button:hover .home-text {
+  opacity: 1;
 }
