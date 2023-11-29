@@ -1,13 +1,16 @@
-// StockHoldingsList.js
+// StockHoldings.js
 import React from 'react';
+import VAUG from './resources/VAUG.png'; 
+import AAPL from './resources/AAPL.png'; 
+import PLTR from './resources/PLTR.png'; 
 
 function StockHoldings() {
   console.log('Rendering StockHoldings');
   const holdings = [
     // Replace with your actual data and images
-    { name: 'S&P 500', quantity: 10, value: '$1000', imageUrl: './VAUG.png' },
-    { name: 'Apple', quantity: 15, value: '$1500', imageUrl: './AAPL.png' },
-    { name: 'Palantir', quantity: 15, value: '$1500', imageUrl: './PLTR.png' },
+    { name: 'S&P 500', quantity: 10, value: '$1000', imageUrl: VAUG },
+    { name: 'Apple', quantity: 15, value: '$1500', imageUrl: AAPL },
+    { name: 'Palantir', quantity: 15, value: '$1500', imageUrl: PLTR },
     // ... more stocks
   ];
 
