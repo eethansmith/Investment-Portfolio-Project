@@ -1,7 +1,6 @@
 from django.urls import path
-from .views import load_transactions
+from .views import get_stock_holdings
 
 urlpatterns = [
-    path('transactions/', load_transactions, name='load_transactions'),
-    # other paths...
+    path('stock_holdings/', get_stock_holdings, name='stock_holdings'),
 ]
