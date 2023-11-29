@@ -81,3 +81,29 @@ h1 {
   color: #F5F5F5; /* Color of the title */
   margin-left: -400px;
 }
+
+.stock-holdings {
+  margin-top: 20px;
+}
+
+.stock-button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%; /* Adjust as needed */
+  background-color: #f3f3f3; /* Light background for the button */
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.stock-image {
+  width: 50px; /* Adjust as needed */
+  height: 50px;
+  margin-right: 15px;
+  border-radius: 50%; /* Circular image */
+}
+
+.stock-info .stock-name {
+  font-weight: bold;
+}

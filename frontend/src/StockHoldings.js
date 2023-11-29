@@ -1,0 +1,31 @@
+// StockHoldingsList.js
+import React from 'react';
+
+function StockHoldings() {
+  console.log('Rendering StockHoldings');
+  const holdings = [
+    // Replace with your actual data and images
+    { name: 'S&P 500', quantity: 10, value: '$1000', imageUrl: './VAUG.png' },
+    { name: 'Apple', quantity: 15, value: '$1500', imageUrl: './AAPL.png' },
+    { name: 'Palantir', quantity: 15, value: '$1500', imageUrl: './PLTR.png' },
+    // ... more stocks
+  ];
+
+  return (
+    <div className="stock-holdings">
+      <h2>My Stock Holdings</h2>
+      {holdings.map((stock, index) => (
+        <button key={index} className="stock-button">
+          <img src={stock.imageUrl} alt={stock.name} className="stock-image" />
+          <div className="stock-info">
+            <div className="stock-name">{stock.name}</div>
+            <div>{`${stock.quantity} shares`}</div>
+            <div>{`${stock.value}`}</div>
+          </div>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default StockHoldings;

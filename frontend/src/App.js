@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import homeImage from './menu-con.jpg';
+import StockHoldings from './StockHoldings'; // Make sure this path is correct
 
 function App() {
   const [activeTab, setActiveTab] = useState('Overall Portfolio'); // default active tab
@@ -31,7 +32,8 @@ function App() {
       <header className="App-header">
         <h1>Overall Portfolio</h1>
       </header>
-      {/* Other components will go here */}
+      <StockHoldings/>
+      { /* Add the rest of your components here */}
     </div>
   );
 }
