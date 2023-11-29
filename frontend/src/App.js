@@ -13,6 +13,9 @@ function App() {
           <img src={homeImage} alt="Home" />
           <span className="home-text">Home</span>
         </div>
+        <div className="project-title">
+          Investment Portfolio
+        </div>
         <div className="nav-links">
           <button 
             className={activeTab === 'Overall Portfolio' ? 'active' : ''} 

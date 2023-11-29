@@ -21,9 +21,11 @@ h1 {
 }
 
 .App-nav {
-  background-color: #1a1a1a; /* Slightly lighter/different than main background for contrast */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a1a;
   padding: 10px 20px;
-  text-align: right;
 }
 
 .nav-links button {
@@ -46,29 +48,36 @@ h1 {
 }
 
 .home-button {
-  display: inline-block;
-  position: relative;
-  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  position: relative; /* This is important for positioning the home-text */
+  cursor: pointer;
 }
 
 .home-button img {
   width: 50px; /* Adjust size as needed */
   height: 50px;
   border-radius: 50%; /* Makes the image circular */
-  cursor: pointer;
 }
 
 .home-text {
   position: absolute;
-  width: 100%;
-  text-align: center;
-  bottom: -20px;
-  left: 0;
+  bottom: -20px; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%); /* Centers the text horizontally */
   opacity: 0;
   transition: opacity 0.3s;
   color: #F5F5F5;
+  white-space: nowrap; /* Keeps the text in a single line */
 }
 
 .home-button:hover .home-text {
   opacity: 1;
+}
+
+.project-title {
+  font-size: 22.5px; /* Larger font size for the title */
+  font-weight: bold;
+  color: #F5F5F5; /* Color of the title */
+  margin-left: -400px;
 }
