@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import VAUG from './resources/VAUG.png';
 import AAPL from './resources/AAPL.png';
 import PLTR from './resources/PLTR.png';
+import MSFT from './resources/MSFT.png';
 
 function StockHoldings() {
   const [holdings, setHoldings] = useState([]);
@@ -37,6 +38,8 @@ function StockHoldings() {
         return AAPL;
       case 'PLTR':
         return PLTR;
+      case 'MSFT':
+        return MSFT;
       // Add cases for other tickers and their corresponding images
       default:
         return ''; // Default image or a placeholder
