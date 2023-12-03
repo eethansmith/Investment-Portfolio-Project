@@ -77,12 +77,8 @@ WSGI_APPLICATION = 'investmentportfolio.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'eethansmith-investmentportfolio-database',
-        'USER': 'kkupfurluc',
-        'PASSWORD': '1FQ6E653770138EP$',
-        'HOST': 'Azure-DevOps-PostgreSQL-Server.postgres.database.azure.com',
-        'PORT': '5432',  # default postgres port
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
