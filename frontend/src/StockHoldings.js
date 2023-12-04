@@ -39,7 +39,7 @@ function StockHoldings() {
     fetchStockHoldings();
 
     // Set up an interval to fetch data every few seconds
-    const interval = setInterval(fetchStockHoldings, 20000);
+    const interval = setInterval(fetchStockHoldings, 2000);
 
     return () => clearInterval(interval);
   }, []);
@@ -85,7 +85,7 @@ function StockHoldings() {
 
   return (
     <div className="stock-holdings">
-      <h2>My Current Stock Holdings</h2>
+      <h2>Current Stock Holdings</h2>
       {holdings.map((stock, index) => (
         <button key={index} className="stock-button">
           <img src={getImageUrl(stock.ticker)} alt={stock.name} className="stock-image" />
