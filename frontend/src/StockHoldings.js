@@ -34,6 +34,10 @@ function StockHoldings() {
     }
   };
 
+  const handleStockClick = (ticker) => {
+    onStockSelect(ticker);
+  };
+
   // useEffect to call the fetch function when the component mounts
   useEffect(() => {
     fetchStockHoldings();
@@ -87,7 +91,7 @@ function StockHoldings() {
     <div className="stock-holdings">
       <h2>Current Stock Holdings</h2>
       {holdings.map((stock, index) => (
-        <button key={index} className="stock-button">
+        <button key={index} className="stock-button" onClick={() => handleStockClick(stock.ticker)}>
           <img src={getImageUrl(stock.ticker)} alt={stock.name} className="stock-image" />
           <div className="stock-details">
             <div className="stock-name">{stock.name}</div>

@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import './App.css';
 import homeImage from './menu-con.jpg';
-import StockHoldings from './StockHoldings'; // Make sure this path is correct
+import StockHoldings from './StockHoldings';
+import StockGraph from './StockGraphing';
 
 function App() {
   const [activeTab, setActiveTab] = useState('Overall Portfolio'); // default active tab
+  const [selectedTicker, setSelectedTicker] = useState(null);
 
   return (
     <div className="App">
