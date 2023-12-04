@@ -34,9 +34,10 @@ function StockHoldings({ onStockSelect }) {
     }
   };
 
-  const handleStockClick = (ticker) => {
+  // Updated handleStockClick to pass the entire stock object
+  const handleStockClick = (stock) => {
     if (onStockSelect) {
-      onStockSelect(ticker); // Use the passed onStockSelect function
+      onStockSelect(stock); // Pass the entire stock object
     }
   };
 
@@ -87,24 +88,24 @@ function StockHoldings({ onStockSelect }) {
 
   return (
     <div className="stock-holdings">
-      <h2>Current Stock Holdings</h2>
-      {holdings.map((stock, index) => (
-        <button key={index} className="stock-button" onClick={() => handleStockClick(stock.ticker)}>
-          <img src={getImageUrl(stock.ticker)} alt={stock.name} className="stock-image" />
-          <div className="stock-details">
-            <div className="stock-name">{stock.name}</div>
-            <div>{`${stock.shares_held} shares`}</div>
+    <h2>Current Stock Holdings</h2>
+    {holdings.map((stock, index) => (
+      <button key={index} className="stock-button" onClick={() => handleStockClick(stock)}>
+        <img src={getImageUrl(stock.ticker)} alt={stock.name} className="stock-image" />
+        <div className="stock-details">
+          <div className="stock-name">{stock.name}</div>
+          <div>{`${stock.shares_held} shares`}</div>
+        </div>
+        <div className="stock-value-gain">
+          <div>{`$${stock.value_held.toFixed(2)}`}</div>
+          <div className="gain-loss" style={{ color: stock.profit_loss_percentage < 0 ? 'red' : 'green' }}>
+            {`${stock.profit_loss_percentage.toFixed(2)}%`}
           </div>
-          <div className="stock-value-gain">
-            <div>{`$${stock.value_held.toFixed(2)}`}</div>
-            <div className="gain-loss" style={{ color: stock.profit_loss_percentage < 0 ? 'red' : 'green' }}>
-              {`${stock.profit_loss_percentage.toFixed(2)}%`}
-            </div>
-          </div>
-        </button>
-      ))}
-    </div>
-  );
+        </div>
+      </button>
+    ))}
+  </div>
+);
 }
 
 export default StockHoldings;
