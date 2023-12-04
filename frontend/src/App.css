@@ -141,3 +141,15 @@ h1 {
   font-weight: bold;
   font-size: 0.9em;
 }
+
+.StockGraph {
+  /* Center the graph */
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+.stock-graph-container {
+  width: 70%; /* Adjust this to your preference */
+  height: 500px; /* Adjust height as needed */
+  margin: 0 auto; /* Center the graph */
+}

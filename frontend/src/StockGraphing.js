@@ -16,15 +16,47 @@ function StockGraph({ ticker }) { // Use destructuring to get the ticker prop
     const chartData = {
         labels: stockData.map(data => data.date),
         datasets: [{
-            label: `${ticker} Stock Value`, // Dynamic label based on ticker
             data: stockData.map(data => data.value),
-            fill: false,
+            fill: true,
+            label: '',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Light green background
             borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
+            borderWidth: 2,
+            tension: 0.1,
+            pointRadius: 0,
+            hoverRadius: 0,
         }]
     };
 
-    return <Line data={chartData} />;
+    const chartOptions = {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true // Start Y-axis at 0
+            }
+        },
+        legend: {
+            display: false // Hide the legend
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        animation: {
+            duration: 1000 // Animation duration in milliseconds
+        }
+    };
+
+
+    return (
+        <div className="stock-graph-container">
+            <Line data={chartData} />
+        </div>
+    );
 }
 
 export default StockGraph;

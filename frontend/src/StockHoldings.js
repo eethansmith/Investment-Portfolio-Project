@@ -16,7 +16,7 @@ import ORCL from './resources/ORCL.png';
 import ZS from './resources/ZS.png';
 import IBM from './resources/IBM.png';
 
-function StockHoldings() {
+function StockHoldings({ onStockSelect }) {
   const [holdings, setHoldings] = useState([]);
 
   // Function to fetch data from your API
@@ -35,16 +35,14 @@ function StockHoldings() {
   };
 
   const handleStockClick = (ticker) => {
-    onStockSelect(ticker);
+    if (onStockSelect) {
+      onStockSelect(ticker); // Use the passed onStockSelect function
+    }
   };
 
-  // useEffect to call the fetch function when the component mounts
   useEffect(() => {
     fetchStockHoldings();
-
-    // Set up an interval to fetch data every few seconds
     const interval = setInterval(fetchStockHoldings, 2000);
-
     return () => clearInterval(interval);
   }, []);
 

@@ -9,6 +9,10 @@ function App() {
   const [activeTab, setActiveTab] = useState('Overall Portfolio'); // default active tab
   const [selectedTicker, setSelectedTicker] = useState(null);
 
+  const handleStockSelection = (ticker) => {
+    setSelectedTicker(ticker); // Update the selected stock ticker
+  };
+
   return (
     <div className="App">
       <nav className="App-nav">
@@ -32,9 +36,13 @@ function App() {
         </div>
       </nav>
       <header className="App-header">
-        <h1>Overall Portfolio</h1>
+      <h1>{selectedTicker ? `${selectedTicker} Holdings` : 'Overall Portfolio'}</h1>
       </header>
-      <StockHoldings/>
+
+      {selectedTicker && <StockGraph ticker={selectedTicker} />}
+
+      <StockHoldings onStockSelect={handleStockSelection} />
+
       { /* Add the rest of your components here */}
     </div>
   );
