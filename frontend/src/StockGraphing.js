@@ -22,7 +22,7 @@ function StockGraph({ ticker }) { // Use destructuring to get the ticker prop
             backgroundColor: 'rgba(245, 245, 245, 0.2)',
             borderColor: 'rgb(245, 245, 245)',
             borderWidth: 0.8,
-            tension: 0.08,
+            tension: 0.01,
             pointRadius: 0,
             hoverRadius: 0,
         }]

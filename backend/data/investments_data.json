@@ -778,7 +778,7 @@
         "Price per Share USD": "$39.44",
         "Image Filename": "IMG_2165.PNG",
         "Transaction Valuation USD": 223.0905473376,
-        "Overall Holdings": 8.881784197001252e-16,
+        "Overall Holdings": 0.0,
         "Average Cost per Share USD": 27.91461712979707,
         "Realized Gain/Loss USD": 65.19279849870615,
         "Portfolio Valuation USD": 2470.1131512486995
@@ -848,7 +848,7 @@
         "Price per Share USD": "$57.01",
         "Image Filename": "IMG_2167.PNG",
         "Transaction Valuation USD": 27.6601762213,
-        "Overall Holdings": -5.551115123125783e-17,
+        "Overall Holdings": 0.0,
         "Average Cost per Share USD": 54.598688512473686,
         "Realized Gain/Loss USD": 1.169922832299997,
         "Portfolio Valuation USD": 2611.8061082888994
@@ -1142,7 +1142,7 @@
         "Price per Share USD": "$37.91",
         "Image Filename": "IMG_2176.PNG",
         "Transaction Valuation USD": 15.4107281366,
-        "Overall Holdings": 8.881784197001252e-16,
+        "Overall Holdings": 0.0,
         "Average Cost per Share USD": 38.71999999999998,
         "Realized Gain/Loss USD": -0.3292716905999923,
         "Portfolio Valuation USD": 2595.6754597536997
@@ -1590,7 +1590,7 @@
         "Price per Share USD": "$22.25",
         "Image Filename": "IMG_2192.PNG",
         "Transaction Valuation USD": 107.713481315,
-        "Overall Holdings": 8.881784197001252e-16,
+        "Overall Holdings": 0.0,
         "Average Cost per Share USD": 69.04279673448227,
         "Realized Gain/Loss USD": -226.52651850499993,
         "Portfolio Valuation USD": 2684.3038206032998
@@ -1702,7 +1702,7 @@
         "Price per Share USD": "$160.08",
         "Image Filename": "IMG_2196.PNG",
         "Transaction Valuation USD": 80.640524112,
-        "Overall Holdings": 1.1102230246251565e-16,
+        "Overall Holdings": 0.0,
         "Average Cost per Share USD": 194.0918810701534,
         "Realized Gain/Loss USD": -17.133532705723262,
         "Portfolio Valuation USD": 2662.7805532620996
