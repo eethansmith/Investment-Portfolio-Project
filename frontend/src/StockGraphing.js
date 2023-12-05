@@ -48,6 +48,18 @@ function StockGraph({ ticker }) { // Use destructuring to get the ticker prop
         scales: {
             y: {
                 beginAtZero: true // Start Y-axis at 0
+            },
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'month',
+                    displayFormats: {
+                        month: 'DD/MM/YY'
+                    }
+                },
+                ticks: {
+                    maxTicksLimit: stockData.length / 30 // Roughly one tick per month, adjust as needed
+                }
             }
         },
         legend: {
