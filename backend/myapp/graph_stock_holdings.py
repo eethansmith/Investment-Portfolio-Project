@@ -41,7 +41,6 @@ def get_stock_history(request, ticker):
 
     for date, row in historical_prices.iterrows():
         date = date.to_pydatetime().replace(tzinfo=None)
-        current_shares = 0  # Reset current shares for each date
         # Accumulate shares up to the current date
         for transaction in transactions:
             transaction_date = datetime.strptime(transaction["Date"], '%d-%m-%Y')
@@ -52,8 +51,7 @@ def get_stock_history(request, ticker):
                     current_average_cost_per_share = float(transaction["Average Cost per Share USD"])
                 elif transaction["Transaction Type"] == "SELL":
                     current_shares -= shares
-                    current_average_cost_per_share = float(transaction["Average Cost per Share USD"])
-
+                    
         # Calculate value for the current date
         stock_worth = current_shares * row['Close']
         stock_paid = current_average_cost_per_share * current_shares
