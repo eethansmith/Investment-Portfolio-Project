@@ -37,6 +37,7 @@ def get_stock_history(request, ticker):
 
     historical_values = []
     current_shares = 0
+    value_paid = 0
 
     # Before the loop, sort transactions by date
     transactions.sort(key=lambda x: datetime.strptime(x["Date"], '%d-%m-%Y'))
@@ -44,6 +45,7 @@ def get_stock_history(request, ticker):
     for date, row in historical_prices.iterrows():
         date = date.to_pydatetime().replace(tzinfo=None)  # Make date timezone naive
         current_shares = 0  # Reset current shares for each date
+        value_paid = 0
 
         # Accumulate shares up to the current date
         for transaction in transactions:
@@ -51,13 +53,23 @@ def get_stock_history(request, ticker):
 
             if transaction_date <= date:
                 shares = float(transaction["No. of Shares"])
+                transaction_amount = float(transaction["Transaction Valuation USD"])
                 if transaction["Transaction Type"] == "BUY":
+                    value_paid += transaction_amount
                     current_shares += shares
                 elif transaction["Transaction Type"] == "SELL":
+                    value_paid -= transaction_amount
                     current_shares -= shares
+                    if value_paid <= 0:
+                        value_paid = 0 
 
         # Calculate value for the current date
+        value_paid = value_paid
         value = current_shares * row['Close']
-        historical_values.append({"date": date.strftime('%Y-%m-%d'), "value": value})
+        historical_values.append({
+            "date": date.strftime('%Y-%m-%d'), 
+            "value": value, 
+            "value_paid": value_paid
+        })
 
     return JsonResponse(historical_values, safe=False)
