@@ -19,10 +19,10 @@ function StockGraph({ ticker }) { // Use destructuring to get the ticker prop
             data: stockData.map(data => data.value),
             fill: true,
             label: '',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Light green background
-            borderColor: 'rgb(75, 192, 192)',
-            borderWidth: 2,
-            tension: 0.1,
+            backgroundColor: 'rgba(245, 245, 245, 0.2)',
+            borderColor: 'rgb(245, 245, 245)',
+            borderWidth: 0.8,
+            tension: 0.08,
             pointRadius: 0,
             hoverRadius: 0,
         }]
@@ -47,7 +47,7 @@ function StockGraph({ ticker }) { // Use destructuring to get the ticker prop
             intersect: true
         },
         animation: {
-            duration: 1000 // Animation duration in milliseconds
+            duration: 2000 // Animation duration in milliseconds
         }
     };
 
