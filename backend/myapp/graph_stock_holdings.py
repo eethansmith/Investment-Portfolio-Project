@@ -37,27 +37,29 @@ def get_stock_history(request, ticker):
 
     historical_values = []
     current_shares = 0
-
-    # Before the loop, sort transactions by date
-    transactions.sort(key=lambda x: datetime.strptime(x["Date"], '%d-%m-%Y'))
+    current_average_cost_per_share = 0
 
     for date, row in historical_prices.iterrows():
-        date = date.to_pydatetime().replace(tzinfo=None)  # Make date timezone naive
+        date = date.to_pydatetime().replace(tzinfo=None)
         current_shares = 0  # Reset current shares for each date
-
         # Accumulate shares up to the current date
         for transaction in transactions:
             transaction_date = datetime.strptime(transaction["Date"], '%d-%m-%Y')
-
             if transaction_date <= date:
                 shares = float(transaction["No. of Shares"])
                 if transaction["Transaction Type"] == "BUY":
                     current_shares += shares
+                    current_average_cost_per_share = float(transaction["Average Cost per Share USD"])
                 elif transaction["Transaction Type"] == "SELL":
                     current_shares -= shares
+                    current_average_cost_per_share = float(transaction["Average Cost per Share USD"])
 
         # Calculate value for the current date
-        value = current_shares * row['Close']
-        historical_values.append({"date": date.strftime('%Y-%m-%d'), "value": value})
+        stock_worth = current_shares * row['Close']
+        stock_paid = current_average_cost_per_share * current_shares
+        historical_values.append({
+            "date": date.strftime('%Y-%m-%d'), 
+            "stock_worth": stock_worth,
+            "stock_paid": stock_paid})
 
     return JsonResponse(historical_values, safe=False)
