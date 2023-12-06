@@ -48,7 +48,7 @@ def print_stock_performance():
     return stock_performance
 
 # Example usage
-##print_current_holdings()
+#print_current_holdings()
 #valuation_changes = print_stock_performance()
 #for change in valuation_changes:
 #    print(change)
