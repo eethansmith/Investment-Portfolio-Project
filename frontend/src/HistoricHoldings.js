@@ -66,6 +66,12 @@ useEffect(() => {
   return () => clearInterval(interval);
 }, []);
 
+// Function to format the net gain/loss with a sign
+const formatNetGainLoss = (netGainLoss) => {
+  // Remove minus sign if present and format with + or -
+  return (netGainLoss < 0 ? '-' : '+') + `$${Math.abs(netGainLoss).toFixed(2)}`;
+};
+
 return (
   <div className="historic-stock-holdings">
     <h2>Previous Stock Holdings</h2>
@@ -77,7 +83,7 @@ return (
         </div>
         <div className="stock-value-gain">
           <div className="gain-loss" style={{ color: stock.net_gain_loss < 0 ? 'red' : 'green' }}>
-            ${stock.net_gain_loss.toFixed(2)}
+            {formatNetGainLoss(stock.net_gain_loss)}
           </div>
         </div>
       </button>

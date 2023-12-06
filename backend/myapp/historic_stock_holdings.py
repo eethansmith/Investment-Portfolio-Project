@@ -63,6 +63,8 @@ def get_historic_stock_holdings(request):
             "net_gain_loss": net_gain_loss
         }
 
-    return JsonResponse(response_data)
+    # Sort response_data based on net_gain_loss
+    sorted_data = sorted(response_data.items(), key=lambda x: x[1]['net_gain_loss'], reverse=True)
+    sorted_response_data = {k: v for k, v in sorted_data}
 
-# Ensure to include necessary URL routing and configurations as per Django's standards
+    return JsonResponse(sorted_response_data)
