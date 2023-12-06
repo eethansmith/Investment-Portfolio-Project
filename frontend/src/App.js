@@ -1,7 +1,7 @@
 // App.js or your main component file
 import React, { useState } from 'react';
 import './App.css';
-import homeImage from './menu-con.jpg';
+import homeImage from './resources/menu-con.jpg';
 import StockHoldings from './StockHoldings';
 import StockGraph from './StockGraphing';
 import HistoricHoldings from './HistoricHoldings';

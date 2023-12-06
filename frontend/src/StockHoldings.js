@@ -32,14 +32,23 @@ function StockHoldings({ onStockSelect }) {
     return () => clearInterval(interval);
   }, []);
 
-  // Function to load images asynchronously
+  // Function to load images
   const loadImage = async (ticker) => {
     try {
       const image = await import(`./resources/${ticker}.png`);
       return image.default;
     } catch (error) {
-      console.error('Error loading image:', error);
-      return ''; // Fallback image or placeholder
+      // Attempt to load without '.L' if it fails
+      if (ticker.endsWith('.L')) {
+        try {
+          const modifiedTicker = ticker.replace('.L', '');
+          const image = await import(`./resources/${modifiedTicker}.png`);
+          return image.default;
+        } catch (innerError) {
+          console.error('Error loading image:', innerError);
+          return '';
+        }
+      }
     }
   };
 
