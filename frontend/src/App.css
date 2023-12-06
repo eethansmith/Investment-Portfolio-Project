@@ -142,6 +142,13 @@ h1 {
   font-size: 0.9em;
 }
 
+.historic-stock-holdings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Increased space between buttons */
+}
+
 .StockGraph {
   /* Center the graph */
   margin: 0 auto;

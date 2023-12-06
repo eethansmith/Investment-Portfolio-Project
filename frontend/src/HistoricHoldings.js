@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import NIO from './resources/NIO.png';
+
 function HistoricHoldings() {
   const [historicHoldings, setHistoricHoldings] = useState([]);
 
@@ -23,18 +25,32 @@ function HistoricHoldings() {
     return () => clearInterval(interval);
   }, []);
 
+    // Function to get the corresponding image based on the stock ticker
+    const getImageUrl = (ticker) => {
+      switch (ticker) {
+        case 'NIO':
+          return NIO;
+        // Add cases for other tickers and their corresponding images
+        default:
+          return ''; // Default image or a placeholder
+      }
+    };
+
   return (
     <div className="historic-stock-holdings">
       <h2>Previous Stock Holdings</h2>
       {historicHoldings.map((stock, index) => (
-        <div key={index} className="stock-item">
-          <div className="stock-name">{stock.name || stock.ticker}</div>
+        <button key={index} className="stock-button">
+          <img src={getImageUrl(stock.ticker)} alt={stock.name || stock.ticker} className="stock-image" />
           <div className="stock-details">
+            <div className="stock-name">{stock.name}</div>
+          </div>
+          <div className="stock-value-gain">
             <div className="gain-loss" style={{ color: stock.net_gain_loss < 0 ? 'red' : 'green' }}>
-              Net Gain/Loss: ${stock.net_gain_loss.toFixed(2)}
+              ${stock.net_gain_loss.toFixed(2)}
             </div>
           </div>
-        </div>
+        </button>
       ))}
     </div>
   );
