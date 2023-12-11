@@ -13,7 +13,7 @@ def get_stock_history(request, ticker):
     if not ticker:
         return JsonResponse({"error": "Ticker symbol is required."}, status=400)
 
-     # Define the path to the JSON file
+    # Define the path to the JSON file
     json_file_path = Path(settings.BASE_DIR) / 'data' / 'investments_data.json'
 
     # Open the JSON file and load its content
@@ -35,12 +35,13 @@ def get_stock_history(request, ticker):
     stock = yf.Ticker(ticker)
     historical_prices = stock.history(start=start_date.strftime('%Y-%m-%d'), end=end_date.strftime('%Y-%m-%d'))
 
+    # Check if data is sparse and fetch hourly data if necessary
+    if len(historical_prices) < 10:
+        historical_prices = stock.history(period="1mo", interval="1h")
+
     historical_values = []
     current_shares = 0
     value_paid = 0
-
-    # Before the loop, sort transactions by date
-    transactions.sort(key=lambda x: datetime.strptime(x["Date"], '%d-%m-%Y'))
 
     for date, row in historical_prices.iterrows():
         date = date.to_pydatetime().replace(tzinfo=None)  # Make date timezone naive
@@ -64,7 +65,6 @@ def get_stock_history(request, ticker):
                         value_paid = 0 
 
         # Calculate value for the current date
-        value_paid = value_paid
         value = current_shares * row['Close']
         historical_values.append({
             "date": date.strftime('%Y-%m-%d'), 
