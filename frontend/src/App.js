@@ -4,7 +4,6 @@ import homeImage from './resources/menu-con.jpg';
 import StockHoldings from './StockHoldings';
 import StockGraph from './StockGraphing';
 import HistoricHoldings from './HistoricHoldings';
-import GraphPortfolio from './HoldingsGraphing'; // Assuming this is your overall portfolio graph component
 
 function App() {
   const [selectedStock, setSelectedStock] = useState(null);
@@ -32,7 +31,7 @@ function App() {
         <div className="project-title">
           Investment Portfolio
         </div>
-        {/* Removing activeTab and setActiveTab related code from nav-links */}
+        {/* Removed activeTab and setActiveTab related code from nav-links */}
         <div className="nav-links">
           <button>Overall Profits</button>
           <button>Stock Breakdown</button>
@@ -54,7 +53,8 @@ function App() {
         )}
       </header>
 
-      {!selectedStock ? <GraphPortfolio days={365} /> : <StockGraph ticker={selectedStock.ticker} />}
+      {/* The overall graphing component and its related code have been removed */}
+      {selectedStock && <StockGraph ticker={selectedStock.ticker} />}
 
       <StockHoldings onStockSelect={handleStockSelection} />
       <HistoricHoldings/>

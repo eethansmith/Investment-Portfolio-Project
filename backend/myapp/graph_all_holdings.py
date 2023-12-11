@@ -8,9 +8,12 @@ import yfinance as yf
 from django.core.cache import cache
 from django.http import JsonResponse
 from django.utils.timezone import make_aware
+import time
 
 # Set your timezone, e.g., 'EST'
 timezone = pytz.timezone('EST')
+
+failed_symbols = set()
 
 def load_transactions():
     json_file_path = Path(settings.BASE_DIR) / 'data' / 'investments_data.json'
@@ -54,10 +57,16 @@ def calculate_holdings_over_period(days):
 
     return daily_holdings
 
-def fetch_historical_prices_with_cache(ticker, start_date, end_date):
+
+def fetch_historical_prices_with_cache(ticker, start_date, end_date, failed_symbols):
     start_date_str = start_date.strftime('%Y-%m-%d')
     end_date_str = end_date.strftime('%Y-%m-%d')
     cache_key = f"{ticker}_{start_date_str}_{end_date_str}".replace(' ', '_').replace(':', '')
+
+    # Check if this symbol has already failed today
+    if ticker in failed_symbols:
+        print(f"{ticker} is marked as potentially delisted, skipping.")
+        return None
 
     cached_data = cache.get(cache_key)
     if cached_data is not None:
@@ -72,7 +81,9 @@ def fetch_historical_prices_with_cache(ticker, start_date, end_date):
         cache.set(cache_key, price_data, timeout=86400)  # Cache for 1 day
         return price_data
     except Exception as e:
-        print(f"Error fetching historical data for {ticker}: {e}")
+        print(f"Error fetching data for {ticker}: {e}")
+        # Mark this symbol as failed for today
+        failed_symbols.add(ticker)
         return None
 
 def is_market_open(date):
@@ -90,12 +101,6 @@ def is_market_open(date):
 def calculate_portfolio_value_over_period(days):
     daily_holdings = calculate_holdings_over_period(days)
     portfolio_value = {}
-    interval = '1d'
-
-    if days <= 7:
-        interval = '1h'  # hourly data for up to 7 days
-    elif days == 1:
-        interval = '1m'  # minute data for a single day
 
     for single_date in daily_holdings:
         if not is_market_open(single_date):
@@ -104,7 +109,8 @@ def calculate_portfolio_value_over_period(days):
         daily_value = 0
         for ticker, shares in daily_holdings[single_date].items():
             if shares > 0:
-                price_data = fetch_historical_prices_with_cache(ticker, single_date, single_date + timedelta(days=1))
+                # Include 'failed_symbols' in the function call
+                price_data = fetch_historical_prices_with_cache(ticker, single_date, single_date + timedelta(days=1), failed_symbols)
                 if price_data is not None:
                     # Find the price for the specific part of the day
                     price = price_data.get(single_date.strftime('%Y-%m-%d'))
@@ -115,6 +121,7 @@ def calculate_portfolio_value_over_period(days):
             portfolio_value[single_date] = daily_value
 
     return dict(sorted(portfolio_value.items()))
+
 
 def get_portfolio_value(request, days):
     try:
