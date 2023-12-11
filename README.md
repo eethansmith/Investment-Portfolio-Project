@@ -15,3 +15,6 @@
 - Daily/Monthly/Yearly View
 
 ![Screenshot showing the main view of the Investment Portfolio Overview page.](./screenshots/img2.png)
+![Screenshot showing the current holdings of the Investment Portfolio Overview page.](./screenshots/img1.png)
+![Screenshot showing the historic holdings of the Investment Portfolio Overview page.](./screenshots/img3.png)
+![Screenshot showing the backend API for the app, in this example it is fetching data of transactions and valuations of Apple stock.](./screenshots/img4.png)
