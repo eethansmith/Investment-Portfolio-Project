@@ -13,3 +13,5 @@
 - Overall portfolio graph
 - Formatting react app for smaller screens & phone screens
 - Daily/Monthly/Yearly View
+
+![Screenshot showing the main view of the Investment Portfolio Overview page.](./screenshots/img2.png)
