@@ -35,10 +35,6 @@ def get_stock_history(request, ticker):
     stock = yf.Ticker(ticker)
     historical_prices = stock.history(start=start_date.strftime('%Y-%m-%d'), end=end_date.strftime('%Y-%m-%d'))
 
-    # Check if data is sparse and fetch hourly data if necessary
-    if len(historical_prices) < 80:
-        historical_prices = stock.history(period="1mo", interval="1h")
-
     historical_values = []
     current_shares = 0
     value_paid = 0

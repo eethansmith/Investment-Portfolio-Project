@@ -7,7 +7,7 @@ function StockGraph({ ticker, timeFrame }) { // Use destructuring to get the tic
 
     useEffect(() => {
         // Ensure the ticker value is included in the fetch URL
-        if (timeFrame == 'All') {
+        if (timeFrame === 'All') {
             fetch(`http://localhost:8000/api/graph_stock/${ticker}/`)
                 .then(response => response.json())
                 .then(data => setStockData(data))
