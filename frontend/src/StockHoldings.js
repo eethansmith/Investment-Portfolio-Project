@@ -6,16 +6,30 @@ function StockHoldings({ onStockSelect, timeFrame }) {
 
   // Function to fetch data from your API
   const fetchStockHoldings = async () => {
-    try {
-      const response = await fetch('http://localhost:8000/api/stock_holdings/');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+    if (timeFrame === 'All') {
+      try {
+        const response = await fetch(`http://localhost:8000/api/stock_holdings/`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        setHoldings(Object.values(data));
+      } catch (error) {
+        console.error('Fetching data failed:', error);
       }
-      const data = await response.json();
-      console.log(data); // Check the structure of the fetched data
-      setHoldings(Object.values(data)); // Convert the object to an array and update state
-    } catch (error) {
-      console.error('Fetching data failed:', error);
+    } else {
+      try {
+        const response = await fetch('http://localhost:8000/api/stock_holdings_day/');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        setHoldings(Object.values(data)); 
+      } catch (error) {
+        console.error('Fetching data failed:', error);
+      }
     }
   };
 
@@ -30,7 +44,7 @@ function StockHoldings({ onStockSelect, timeFrame }) {
     fetchStockHoldings();
     const interval = setInterval(fetchStockHoldings, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [timeFrame]);
 
   // Function to load images
   const loadImage = async (ticker) => {
@@ -70,7 +84,7 @@ function StockHoldings({ onStockSelect, timeFrame }) {
     fetchStockHoldings();
     const interval = setInterval(fetchStockHoldings, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [timeFrame]);
 
   return (
     <div className="stock-holdings">

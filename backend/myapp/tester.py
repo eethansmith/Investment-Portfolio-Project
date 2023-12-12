@@ -1,4 +1,4 @@
 import yfinance as yf
 
-ticker = yf.Ticker("VUAG.L")
+ticker = yf.Ticker("AAPL")
 print(ticker.info)
