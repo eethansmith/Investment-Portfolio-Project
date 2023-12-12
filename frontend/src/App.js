@@ -4,12 +4,19 @@ import homeImage from './resources/menu-con.jpg';
 import StockHoldings from './StockHoldings';
 import StockGraph from './StockGraphing';
 import HistoricHoldings from './HistoricHoldings';
+import TimeFrameFlip from './TimeFrameFlip';
 
 function App() {
   const [selectedStock, setSelectedStock] = useState(null);
+  const [timeFrame, setTimeFrame] = useState('All');
 
   const handleStockSelection = (stock) => {
-    setSelectedStock(stock); // Update the selected stock
+    setSelectedStock(stock);
+  };
+
+    
+  const handleTimeFrameChange = (newTimeFrame) => {
+    setTimeFrame(newTimeFrame);
   };
 
   // Function to format the profit/loss percentage
@@ -33,30 +40,35 @@ function App() {
         </div>
         {/* Removed activeTab and setActiveTab related code from nav-links */}
         <div className="nav-links">
+          <button>Portfolio</button>
           <button>Overall Profits</button>
           <button>Stock Breakdown</button>
           <button>News</button>
         </div>
       </nav>
       <header className="App-header">
+        <div className="header-content">
+        <div className="title-container">
         <h1>{selectedStock ? `${selectedStock.name}` : 'Overall Portfolio'}</h1>
-        {selectedStock && (
-          <div className="stock-info">
-            <p>
-              Current Value: ${selectedStock.value_held.toFixed(2)}
-              <span style={{ color: selectedStock.profit_loss_percentage >= 0 ? 'green' : 'red' }}>
-                {` (${formatPercentage(selectedStock.profit_loss_percentage)})`}
-              </span>
-            </p>
-            <p>Shares Held: {selectedStock.shares_held}</p>
+        </div>
+          <TimeFrameFlip onTimeFrameChange={handleTimeFrameChange} currentTimeFrame={timeFrame} />
           </div>
+          {selectedStock && (
+            <div className="stock-info">
+              <p>
+                Current Value: ${selectedStock.value_held.toFixed(2)}
+                <span style={{ color: selectedStock.profit_loss_percentage >= 0 ? 'green' : 'red' }}>
+                  {` (${formatPercentage(selectedStock.profit_loss_percentage)})`}
+                </span>
+              </p>
+              <p>Shares Held: {selectedStock.shares_held}</p>
+            </div>
         )}
       </header>
-
       {/* The overall graphing component and its related code have been removed */}
-      {selectedStock && <StockGraph ticker={selectedStock.ticker} />}
+      {selectedStock && <StockGraph ticker={selectedStock.ticker} timeFrame={timeFrame} />}
 
-      <StockHoldings onStockSelect={handleStockSelection} />
+      <StockHoldings onStockSelect={handleStockSelection} timeFrame={timeFrame} />
       <HistoricHoldings/>
       {/* Rest of your components */}
     </div>

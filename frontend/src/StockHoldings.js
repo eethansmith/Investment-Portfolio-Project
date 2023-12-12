@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function StockHoldings({ onStockSelect }) {
+function StockHoldings({ onStockSelect, timeFrame }) {
   const [holdings, setHoldings] = useState([]);
   const [images, setImages] = useState({});
 

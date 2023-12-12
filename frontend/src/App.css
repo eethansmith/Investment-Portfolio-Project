@@ -10,16 +10,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App-header {
-  background-color: #121212; /* Same as body background */
-  padding: 20px;
-  text-align: center;
-}
-
-h1 {
-  color: #F5F5F5; /* Off-white color for the title */
-}
-
 .App-nav {
   display: flex;
   justify-content: space-between;
@@ -76,10 +66,74 @@ h1 {
 }
 
 .project-title {
-  font-size: 22.5px; /* Larger font size for the title */
+  font-size: 22.5px;
   font-weight: bold;
-  color: #F5F5F5; /* Color of the title */
-  margin-left: -400px;
+  color: #F5F5F5;
+}
+
+.App-header {
+  background-color: #121212;
+  padding: 1.5%;
+  position: relative;
+  text-align: center; 
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.title-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  padding: 0% 20%;
+}
+
+/*-------------------*/
+.time-frame-flipper {
+  position: absolute;
+  right: 2%; /* Adjust as necessary */
+  top: 50%;
+  transform: translateY(-50%); /* Vertically center */
+
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0px;
+}
+
+.time-frame-btn {
+  /* Base styles for all buttons */
+  padding: 10px 20px;
+  border: 1px solid #1a1a1a;
+  background-color: #121212;
+  color: #F5F5F5;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.time-frame-btn:hover {
+  /* Hover effect */
+  background-color: #e0e0e0;
+  color: #1a1a1a;
+}
+
+.time-frame-btn.active {
+  /* Styles for the active button */
+  border: 1px solid #F5F5F5;
+  background-color: #1a1a1a;
+  color: white;
+  font-style: bold;
+}
+/*-------------------*/
+
+/* Styles for the title */
+h1 {
+  color: #F5F5F5;
 }
 
 .stock-holdings {
