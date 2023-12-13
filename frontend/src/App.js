@@ -28,6 +28,29 @@ function App() {
     }
   };
 
+  const fetchSelectedStockData = async () => {
+    if (selectedStock) {
+      try {
+        const response = await fetch(`[Your API Endpoint]/${selectedStock.ticker}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        // Update your selectedStock state with the new data
+        setSelectedStock(data);
+      } catch (error) {
+        console.error('Fetching stock data failed:', error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchSelectedStockData();
+    }, 5000); 
+    return () => clearInterval(interval);
+  }, [selectedStock]);
+
   return (
     <div className="App">
       <nav className="App-nav">
@@ -57,6 +80,7 @@ function App() {
             <div className="stock-info">
               <p>
                 Current Value: ${selectedStock.value_held.toFixed(2)}
+                
                 <span style={{ color: selectedStock.profit_loss_percentage >= 0 ? 'green' : 'red' }}>
                   {` (${formatPercentage(selectedStock.profit_loss_percentage)})`}
                 </span>

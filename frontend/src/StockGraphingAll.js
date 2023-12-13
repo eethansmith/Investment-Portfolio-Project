@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
+import 'chartjs-adapter-date-fns';
 
 function StockGraphAll({ ticker, timeFrame }) { // Use destructuring to get the ticker prop
     const [stockData, setStockData] = useState([]);
@@ -45,43 +46,42 @@ function StockGraphAll({ ticker, timeFrame }) { // Use destructuring to get the 
 
     const chartOptions = {
         responsive: true,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                mode: 'index',
+                intersect: false
+            },
+        },
         scales: {
             y: {
-                beginAtZero: true // Start Y-axis at 0
+                beginAtZero: false 
             },
             x: {
                 type: 'time',
                 time: {
-                    unit: 'month',
+                    unit: 'day',
                     displayFormats: {
-                        month: 'DD-MM-YY'
+                        month: 'dd-MM-yy'
                     }
                 },
                 ticks: {
-                    display: false // Hide the X-axis labels
+                    display: false
                 }
             }
         },
-        legend: {
-            display: false // Hide the legend
-        },
-        tooltips: {
-            mode: 'index',
-            intersect: false
-        },
-        hover: {
-            mode: 'nearest',
-            intersect: true
-        },
         animation: {
-            duration: 200 // Animation duration in milliseconds
+            duration: 1000 // Animation duration in milliseconds
         }
     };
+    
 
 
     return (
         <div className="stock-graph-container">
-            <Line data={chartData} />
+            <Line data={chartData} options={chartOptions} />
         </div>
     );
 }
