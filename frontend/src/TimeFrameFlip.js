@@ -6,10 +6,10 @@ function TimeFrameFlip({ onTimeFrameChange, currentTimeFrame }) {
         <button className={`time-frame-btn ${currentTimeFrame === 'All' ? 'active' : ''}`} onClick={() => onTimeFrameChange('All')}>
           All
         </button>
-        <button className={`time-frame-btn ${currentTimeFrame === '1 month' ? 'active' : ''}`} onClick={() => onTimeFrameChange('1 month')}>
+        <button className={`time-frame-btn ${currentTimeFrame === 'Month' ? 'active' : ''}`} onClick={() => onTimeFrameChange('Month')}>
           Month
         </button>
-        <button className={`time-frame-btn ${currentTimeFrame === '1 day' ? 'active' : ''}`} onClick={() => onTimeFrameChange('1 day')}>
+        <button className={`time-frame-btn ${currentTimeFrame === 'Day' ? 'active' : ''}`} onClick={() => onTimeFrameChange('Day')}>
           Day
         </button>
       </div>

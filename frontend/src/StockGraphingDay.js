@@ -2,22 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 
-function StockGraph({ ticker, timeFrame }) { // Use destructuring to get the ticker prop
+function StockGraphDay({ ticker, timeFrame }) {
     const [stockData, setStockData] = useState([]);
 
     useEffect(() => {
         // Ensure the ticker value is included in the fetch URL
-        if (timeFrame === 'All') {
-            fetch(`http://localhost:8000/api/graph_stock/${ticker}/`)
-                .then(response => response.json())
-                .then(data => setStockData(data))
-                .catch(error => console.error('Error fetching data:', error));
-        } else {
-            fetch(`http://localhost:8000/api/graph_stock_day/${ticker}/`)
-                .then(response => response.json())
-                .then(data => setStockData(data))
-                .catch(error => console.error('Error fetching data:', error));
-        }
+        fetch(`http://localhost:8000/api/graph_stock_day/${ticker}/`)
+            .then(response => response.json())
+            .then(data => setStockData(data))
+            .catch(error => console.error('Error fetching data:', error));
     }, [ticker]);
 
     const chartData = {
@@ -59,29 +52,36 @@ function StockGraph({ ticker, timeFrame }) { // Use destructuring to get the tic
             x: {
                 type: 'time',
                 time: {
-                    unit: 'month',
+                    unit: 'day',
                     displayFormats: {
                         month: 'DD/MM/YY'
                     }
                 },
                 ticks: {
-                    maxTicksLimit: stockData.length / 30 // Roughly one tick per month, adjust as needed
+                    display: false
                 }
             }
         },
-        legend: {
-            display: false // Hide the legend
-        },
-        tooltips: {
-            mode: 'index',
-            intersect: false
+        plugins: { 
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+                callbacks: {
+                    title: function(tooltipItem, data) {
+                        return '${data.datasets[tooltipItem.datasetIndex].label}: ${tooltipItem.formattedValue}';
+                    }
+                }
+            },
+            legend: {
+                display: false // Hide the legend
+            }
         },
         hover: {
             mode: 'nearest',
             intersect: true
         },
         animation: {
-            duration: 2000 // Animation duration in milliseconds
+            duration: 200 // Animation duration in milliseconds
         }
     };
 
@@ -93,4 +93,4 @@ function StockGraph({ ticker, timeFrame }) { // Use destructuring to get the tic
     );
 }
 
-export default StockGraph;
+export default StockGraphDay;

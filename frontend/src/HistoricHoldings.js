@@ -21,8 +21,6 @@ function HistoricHoldings() {
 
   useEffect(() => {
     fetchHistoricStockHoldings();
-    const interval = setInterval(fetchHistoricStockHoldings, 2000);
-    return () => clearInterval(interval);
   }, []);
 
   // Function to load images
@@ -59,12 +57,6 @@ useEffect(() => {
     loadImages();
   }
 }, [historicHoldings]);
-
-useEffect(() => {
-  fetchHistoricStockHoldings();
-  const interval = setInterval(fetchHistoricStockHoldings, 2000);
-  return () => clearInterval(interval);
-}, []);
 
 // Function to format the net gain/loss with a sign
 const formatNetGainLoss = (netGainLoss) => {

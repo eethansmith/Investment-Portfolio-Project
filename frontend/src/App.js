@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import homeImage from './resources/menu-con.jpg';
 import StockHoldings from './StockHoldings';
-import StockGraph from './StockGraphing';
+import StockGraphAll from './StockGraphingAll';
+import StockGraphDay from './StockGraphingDay';
 import HistoricHoldings from './HistoricHoldings';
 import TimeFrameFlip from './TimeFrameFlip';
 
@@ -14,7 +15,6 @@ function App() {
     setSelectedStock(stock);
   };
 
-    
   const handleTimeFrameChange = (newTimeFrame) => {
     setTimeFrame(newTimeFrame);
   };
@@ -66,8 +66,8 @@ function App() {
         )}
       </header>
       {/* The overall graphing component and its related code have been removed */}
-      {selectedStock && <StockGraph ticker={selectedStock.ticker} timeFrame={timeFrame} />}
-
+      {selectedStock && timeFrame === 'All' && <StockGraphAll ticker={selectedStock.ticker} timeFrame={timeFrame} />}
+      {selectedStock && timeFrame === 'Day' && <StockGraphDay ticker={selectedStock.ticker} timeFrame={timeFrame} />}
       <StockHoldings onStockSelect={handleStockSelection} timeFrame={timeFrame} />
       <HistoricHoldings/>
       {/* Rest of your components */}

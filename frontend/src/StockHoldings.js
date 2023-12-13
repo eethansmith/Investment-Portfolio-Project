@@ -18,7 +18,7 @@ function StockHoldings({ onStockSelect, timeFrame }) {
       } catch (error) {
         console.error('Fetching data failed:', error);
       }
-    } else {
+    } else if (timeFrame === 'Day') {
       try {
         const response = await fetch('http://localhost:8000/api/stock_holdings_day/');
         if (!response.ok) {
@@ -33,18 +33,21 @@ function StockHoldings({ onStockSelect, timeFrame }) {
     }
   };
 
+  useEffect(() => {
+    // Call fetchStockHoldings immediately when the component mounts
+    fetchStockHoldings();
+    // Set up the interval to fetch data regularly
+    const intervalId = setInterval(fetchStockHoldings, 1000); 
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, [timeFrame]);
+
   // Updated handleStockClick to pass the entire stock object
   const handleStockClick = (stock) => {
     if (onStockSelect) {
       onStockSelect(stock); // Pass the entire stock object
     }
   };
-
-  useEffect(() => {
-    fetchStockHoldings();
-    const interval = setInterval(fetchStockHoldings, 2000);
-    return () => clearInterval(interval);
-  }, [timeFrame]);
 
   // Function to load images
   const loadImage = async (ticker) => {
@@ -79,12 +82,6 @@ function StockHoldings({ onStockSelect, timeFrame }) {
       loadImages();
     }
   }, [holdings]);
-
-  useEffect(() => {
-    fetchStockHoldings();
-    const interval = setInterval(fetchStockHoldings, 2000);
-    return () => clearInterval(interval);
-  }, [timeFrame]);
 
   return (
     <div className="stock-holdings">
