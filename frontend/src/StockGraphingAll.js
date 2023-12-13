@@ -22,7 +22,6 @@ function StockGraphAll({ ticker, timeFrame }) { // Use destructuring to get the 
                 label: 'Stock Value',
                 data: stockData.map(data => data.value),
                 fill: false,
-                backgroundColor: 'rgba(75, 192, 192 0.1)',
                 borderColor: 'rgb(75, 245, 192)',
                 borderWidth: 0.8,
                 tension: 0.1,

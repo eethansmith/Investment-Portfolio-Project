@@ -56,6 +56,7 @@ def get_stock_history_day(request, ticker):
         historical_prices = today_data
 
     shares_held = get_current_shares_held(ticker)
+    current_open_time = today_data.index[0]
     
     # Fetch the previous day's closing price
     previous_day_data = stock.history(period="2d", interval="1d")
@@ -64,10 +65,21 @@ def get_stock_history_day(request, ticker):
     previous_close = previous_day_data['Close'].iloc[-2]
     previous_close_paid = shares_held * previous_close
 
+    # Add previous day's close as the first data point
+    adjusted_close_time = current_open_time - timedelta(minutes=1)
+    adjusted_close_time_str = adjusted_close_time.tz_convert(timezone).strftime('%Y-%m-%d %H:%M:%S')
+
     historical_values = [{
+        "date": adjusted_close_time_str,
+        "value": previous_close * shares_held,
+        "value_paid": previous_close_paid
+    }]
+
+    # Add rest of the historical values
+    historical_values.extend([{
         "date": date.tz_convert(timezone).strftime('%Y-%m-%d %H:%M:%S'),
         "value": row['Close'] * shares_held,  # Current value of shares held
         "value_paid": previous_close_paid  # Value based on previous day's close
-    } for date, row in historical_prices.iterrows()]
+    } for date, row in historical_prices.iterrows()])
 
     return JsonResponse(historical_values, safe=False)
