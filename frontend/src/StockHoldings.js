@@ -87,7 +87,7 @@ function StockHoldings({ onStockSelect, timeFrame }) {
     <div className="stock-holdings">
       <h2>Current Stock Holdings</h2>
       {holdings.map((stock, index) => (
-        <button key={index} className="stock-button" onClick={() => handleStockClick(stock)}>
+        <button key={`sh_${index}`} className="stock-button" onClick={() => handleStockClick(stock)}>
           <img src={images[stock.ticker]} alt={stock.name} className="stock-image" />
           <div className="stock-details">
             <div className="stock-name">{stock.name}</div>

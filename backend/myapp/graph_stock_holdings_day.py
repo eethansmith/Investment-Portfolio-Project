@@ -42,22 +42,26 @@ def get_stock_history_day(request, ticker):
         return JsonResponse({"error": "Ticker symbol is required."}, status=400)
 
     stock = yf.Ticker(ticker)
-    # Get today's date and yesterday's date in the specified timezone
     today = datetime.now(tz=timezone).date()
-    yesterday = today - timedelta(days=1)
 
-    # Fetch today's data
-    today_data = stock.history(period='1d', interval='1m', start=today, end=today + timedelta(days=1))
+    # Initialize variable to hold historical prices
+    historical_prices = None
 
-    if today_data.empty:  # If today's data is empty, assume the market is closed
-        # Fetch previous day's data
-        historical_prices = stock.history(period='1d', interval='1m', start=yesterday, end=today)
-    else:
-        historical_prices = today_data
+    # Loop to find the most recent market day with data
+    for i in range(7):  # Check up to a week back
+        check_day = today - timedelta(days=i)
+        day_data = stock.history(period='1d', interval='1m', start=check_day, end=check_day + timedelta(days=1))
+        
+        if not day_data.empty:
+            historical_prices = day_data
+            break
+
+    if historical_prices is None:
+        return JsonResponse({"error": "No recent market data available."}, status=404)
 
     shares_held = get_current_shares_held(ticker)
-    current_open_time = today_data.index[0]
-    
+    current_open_time = historical_prices.index[0]
+
     # Fetch the previous day's closing price
     previous_day_data = stock.history(period="2d", interval="1d")
     if len(previous_day_data) < 2:
@@ -78,8 +82,8 @@ def get_stock_history_day(request, ticker):
     # Add rest of the historical values
     historical_values.extend([{
         "date": date.tz_convert(timezone).strftime('%Y-%m-%d %H:%M:%S'),
-        "value": row['Close'] * shares_held,  # Current value of shares held
-        "value_paid": previous_close_paid  # Value based on previous day's close
+        "value": row['Close'] * shares_held,
+        "value_paid": previous_close_paid
     } for date, row in historical_prices.iterrows()])
 
     return JsonResponse(historical_values, safe=False)

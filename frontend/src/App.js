@@ -4,6 +4,7 @@ import homeImage from './resources/menu-con.jpg';
 import StockHoldings from './StockHoldings';
 import StockGraphAll from './StockGraphingAll';
 import StockGraphDay from './StockGraphingDay';
+import AllGraphingDay from './AllGraphingDay';
 import HistoricHoldings from './HistoricHoldings';
 import TimeFrameFlip from './TimeFrameFlip';
 
@@ -72,12 +73,13 @@ function App() {
       <header className="App-header">
         <div className="header-content">
         <div className="title-container">
-        <h1>{selectedStock ? `${selectedStock.name}` : 'Overall Portfolio'}</h1>
-        </div>
-          <TimeFrameFlip onTimeFrameChange={handleTimeFrameChange} currentTimeFrame={timeFrame} />
+            <h1>{selectedStock ? `${selectedStock.name}` : 'Overall Portfolio'}</h1>
           </div>
-          {selectedStock && (
-            <div className="stock-info">
+          <TimeFrameFlip onTimeFrameChange={handleTimeFrameChange} currentTimeFrame={timeFrame} />
+        </div>
+        {!selectedStock && timeFrame === 'Day' && <AllGraphingDay />}
+        {selectedStock && (
+          <div className="stock-info">
               <p>
                 Current Value: ${selectedStock.value_held.toFixed(2)}
                 
