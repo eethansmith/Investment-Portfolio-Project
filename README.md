@@ -8,13 +8,22 @@
 - Setting up Django backend to feed API data from the database for display on react
 - Live data using yfinanace and refreshing to get constant gain/loss percentages
 - Each stock is a button that shows breakdown of that stock holding on a graph
+- Daily/Monthly/Yearly View
 ### What do I still need to make it do?
 - Other tabs for specific breakdowns
 - Overall portfolio graph
 - Formatting react app for smaller screens & phone screens
-- Daily/Monthly/Yearly View
 
 ![Screenshot showing the main view of the Investment Portfolio Overview page.](./screenshots/img2.png)
 ![Screenshot showing the current holdings of the Investment Portfolio Overview page.](./screenshots/img3.png)
 ![Screenshot showing the historic holdings of the Investment Portfolio Overview page.](./screenshots/img1.png)
 ![Screenshot showing the backend API for the app, in this example it is fetching data of transactions and valuations of Apple stock.](./screenshots/img4.png)
+
+## Most recent addition:
+- Most recently I added the feature of jumping between, Daily, Monthly and All data visualisation.
+- The feature is currently a work in progress, only working for specific stocks.
+![Screenshot showing the main view of the Investment Portfolio Overview page with the daily view of Apple stock.](./screenshots/img5.png)
+
+![Screenshot showing the main view of the Investment Portfolio Overview page with the all view of Palantir stock.](./screenshots/img6.png)
+## Going forward from my current addition:
+- Next step is the current holdings Daily, Monthly and All graph.
