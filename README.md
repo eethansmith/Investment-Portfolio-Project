@@ -21,7 +21,6 @@
 
 ## Most recent addition:
 - Most recently I added the feature of jumping between, Daily, Monthly and All data visualisation.
-- The feature is currently a work in progress, only working for specific stocks.
 
 ![Screenshot showing the main view of the Investment Portfolio Overview page with the daily view of Apple stock.](./screenshots/img5.png)
 ![Screenshot showing the main view of the Investment Portfolio Overview page with the all view of Palantir stock.](./screenshots/img6.png)
